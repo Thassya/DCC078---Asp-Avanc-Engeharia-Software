@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        Mensagem intuitiva e simples de sucesso :D
+        Deu ceeeerto!!! Yayyyy!
     </body>
 </html>

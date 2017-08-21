@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        Mensagem intuitiva e simples de erro :(
+        Deu erro. Que feio. Arruma isso poxa!
     </body>
 </html>

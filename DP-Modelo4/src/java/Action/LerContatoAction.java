@@ -6,7 +6,14 @@
 package Action;
 
 import Controller.Action;
+import Model.Contato;
+import Persistencia.ContatoDAO;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +25,32 @@ public class LerContatoAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String codigo = request.getParameter("codigo");
+        
+        if(codigo.equals("")){
+            response.sendRedirect("index.jsp");
+        }
+        else{
+            try{
+                int codInt = Integer.parseInt(codigo);
+                Contato c = ContatoDAO.getInstance().getContato(codInt);
+                
+                request.setAttribute("codigo", c.getId());
+                request.setAttribute("nome", c.getNome());
+                request.setAttribute("email", c.getEmail());
+                
+                RequestDispatcher view = request.getRequestDispatcher("ContatoLer.jsp");
+                view.forward(request, response);
+                
+            } catch(SQLException e){
+                response.sendRedirect("ContatoErro.jsp");
+                e.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GravarContatoAction.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ServletException ex) {
+                Logger.getLogger(LerContatoAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
 }
