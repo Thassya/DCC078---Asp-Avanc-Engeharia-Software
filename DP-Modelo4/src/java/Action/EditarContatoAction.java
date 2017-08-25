@@ -28,26 +28,32 @@ public class EditarContatoAction implements Action {
          String codigo = request.getParameter("id");
          String nome = request.getParameter("textNome");
          String email = request.getParameter("textEmail");
+         String empresa = request.getParameter("textCodigoEmpresa");
          
          if(codigo==null || codigo.equals("")){
-              response.sendRedirect("index.jsp");
+           try {
+                request.setAttribute("codigo", codigo);
+                request.setAttribute("email", email);
+                request.setAttribute("nome", nome);
+                request.setAttribute("empresa", empresa);
+            
+                RequestDispatcher view = request.getRequestDispatcher("Empresa/EmpresaBusca.jsp");
+            
+                view.forward(request, response);
+            } catch (ServletException ex) {
+                Logger.getLogger(EditarContatoAction.class.getName()).log(Level.SEVERE, null, ex);
+            } 
          }
          else{
             try{
-                int codInt = Integer.parseInt(codigo);
-                Contato c = new Contato();
-                c.setId(codInt);
-                c.setNome(nome);
-                c.setEmail(email);
-                
-                ContatoDAO.getInstance().update(c);
-                
+                Contato contato = new Contato(Integer.parseInt(codigo), nome, email, Integer.parseInt(empresa));
+                ContatoDAO.getInstance().update(contato);                
                               
-                RequestDispatcher view = request.getRequestDispatcher("Contato/ContatoBusca.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("Contato/Formulario.jsp");
                 view.forward(request, response);
                 
             } catch(SQLException e){
-                response.sendRedirect("Contato/ContatoErro.jsp");
+                response.sendRedirect("Erro.jsp");
                 e.printStackTrace();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(GravarContatoAction.class.getName()).log(Level.SEVERE, null, ex);

@@ -25,7 +25,7 @@ public class LerEmpresaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String codigo = request.getParameter("codigo");
+        String codigo = request.getParameter("id");
         
         if(codigo.equals("")){
             response.sendRedirect("index.jsp");

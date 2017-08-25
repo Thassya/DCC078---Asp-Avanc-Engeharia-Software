@@ -30,17 +30,18 @@ public class GravarContatoAction implements Action {
         
         String nome = request.getParameter("textNome");
         String email = request.getParameter("textEmail");
+        String empresa = request.getParameter("textCodigoEmpresa");
         
         if(nome.equals("") || email.equals("")){
             response.sendRedirect("Contato/Formulario.jsp");
         }
         else{
             try{
-                Contato contato = new Contato(nome, email);
+                Contato contato = new Contato(nome, email, Integer.parseInt(empresa));
                 ContatoDAO.getInstance().save(contato);
-                response.sendRedirect("Contato/ContatoSucesso.jsp");
+                response.sendRedirect("Sucesso.jsp");
             } catch(SQLException e){
-                response.sendRedirect("Contato/ContatoErro.jsp");
+                response.sendRedirect("Erro.jsp");
                 e.printStackTrace();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(GravarContatoAction.class.getName()).log(Level.SEVERE, null, ex);

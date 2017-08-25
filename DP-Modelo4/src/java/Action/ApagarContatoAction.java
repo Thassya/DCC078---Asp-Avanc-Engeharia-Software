@@ -40,7 +40,7 @@ public class ApagarContatoAction implements Action{
                 view.forward(request, response);
                 
             } catch(SQLException e){
-                response.sendRedirect("Contato/ContatoErro.jsp");
+                response.sendRedirect("Erro.jsp");
                 e.printStackTrace();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(GravarContatoAction.class.getName()).log(Level.SEVERE, null, ex);

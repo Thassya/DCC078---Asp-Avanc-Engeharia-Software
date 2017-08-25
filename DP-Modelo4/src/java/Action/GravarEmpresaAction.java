@@ -27,7 +27,7 @@ public class GravarEmpresaAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String descricao = request.getParameter("textDescricao");
+        String descricao = request.getParameter("txtDescricao");
         if (descricao == null || descricao.equals("")) {
             //response.sendRedirect();
         } else {

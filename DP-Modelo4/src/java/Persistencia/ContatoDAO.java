@@ -40,8 +40,8 @@ public class ContatoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO contatos (nome, email)"
-                    + " VALUES ('" + contato.getNome() + "', '" + contato.getEmail() + "')");
+            st.execute("INSERT INTO contatos (nome, email, id_empresa)"
+                    + " VALUES ('" + contato.getNome() + "', '" + contato.getEmail() + "' , " + contato.getIdEmpresa() + ")");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -57,7 +57,7 @@ public class ContatoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("UPDATE contatos set nome = '" + contato.getNome()
-                    + "', email = '" + contato.getEmail() + "' WHERE id = " + contato.getId());
+                    + "', email = '" + contato.getEmail() + "', id_empresa = " + contato.getIdEmpresa() + " WHERE id = " + contato.getId());
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -81,6 +81,7 @@ public class ContatoDAO {
                 c.setId(res.getInt("id"));
                 c.setNome(res.getString("nome"));
                 c.setEmail(res.getString("email"));
+                c.setIdEmpresa(res.getInt("id_empresa"));
                 resultado.add(c);
             }
 
@@ -92,8 +93,8 @@ public class ContatoDAO {
             closeResources(conn, st);
         }
     }
-    
-    public void excluir(int id) throws ClassNotFoundException, SQLException{
+
+    public void excluir(int id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -101,15 +102,15 @@ public class ContatoDAO {
             st = conn.prepareStatement("DELETE FROM contatos WHERE id = ?");
             st.setInt(1, id);
             st.execute();
-            
-        } catch(SQLException e) {
+
+        } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
         }
     }
-    
-    public Contato getContato(int id) throws ClassNotFoundException,SQLException{
+
+    public Contato getContato(int id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs;
@@ -118,15 +119,16 @@ public class ContatoDAO {
             st = conn.prepareStatement("SELECT * FROM contatos WHERE id = ?");
             st.setInt(1, id);
             rs = st.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 return new Contato(
-                            rs.getInt("id"), 
-                            rs.getString("nome"), 
-                            rs.getString("email")
-                       );
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getInt("id_empresa")
+                );
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);

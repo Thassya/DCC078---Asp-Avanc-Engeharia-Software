@@ -26,7 +26,7 @@ public class EditarEmpresaAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
          String codigo = request.getParameter("id");
-         String descricao = request.getParameter("textDescricao");
+         String descricao = request.getParameter("txtDescricao");
          
          if(codigo==null || codigo.equals("")){
               response.sendRedirect("index.jsp");

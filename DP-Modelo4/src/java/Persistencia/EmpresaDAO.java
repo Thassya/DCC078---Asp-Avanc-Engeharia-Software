@@ -11,6 +11,8 @@ import Model.Empresa;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -92,7 +94,7 @@ public class EmpresaDAO {
             if (rs.next()) {
                 return new Empresa(
                         rs.getInt("id"),
-                        rs.getString("Descricao")
+                        rs.getString("descricao")
                 );
             }
         } catch (SQLException e) {
@@ -103,6 +105,33 @@ public class EmpresaDAO {
         return null;
     }
 
+    public List<Empresa> getAll() throws ClassNotFoundException, SQLException {
+        List<Empresa> empresas = new ArrayList<Empresa>();
+        Connection conn = null;
+        Statement st = null;
+        
+        try {
+            String query = "SELECT * FROM empresas ";
+            
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            
+            ResultSet rs = st.executeQuery(query);
+           
+            while(rs.next()){
+                Empresa emp = new Empresa(rs.getInt("id"),rs.getString("descricao"));
+                empresas.add(emp);            
+            }
+
+        } catch(SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+        
+        return empresas;
+    }
+    
     private void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {

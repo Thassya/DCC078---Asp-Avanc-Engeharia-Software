@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Excluir
-    Created on : 21/08/2017, 21:16:16
+    Document   : EmpresaExcluir
+    Created on : 25/08/2017, 10:39:06
     Author     : thassya
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Excluir Page</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>O Contato de Id ${id} foi excluido com sucesso!</h1>
+        <h1>A empresa de Id ${id} foi excluida com sucesso!</h1>
     </body>
 </html>
