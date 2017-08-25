@@ -6,8 +6,8 @@
 package Action;
 
 import Controller.Action;
-import Model.Contato;
-import Persistencia.ContatoDAO;
+import Model.Empresa;
+import Persistencia.EmpresaDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,35 +17,31 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author 08240104690
+ * @author thassya
  */
-public class GravarContatoAction implements Action {
-    
-    public GravarContatoAction(){
-        
+public class GravarEmpresaAction implements Action {
+
+    public GravarEmpresaAction() {
     }
-    
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
-        String nome = request.getParameter("textNome");
-        String email = request.getParameter("textEmail");
-        
-        if(nome.equals("") || email.equals("")){
-            response.sendRedirect("Contato/Formulario.jsp");
-        }
-        else{
-            try{
-                Contato contato = new Contato(nome, email);
-                ContatoDAO.getInstance().save(contato);
-                response.sendRedirect("Contato/ContatoSucesso.jsp");
-            } catch(SQLException e){
-                response.sendRedirect("Contato/ContatoErro.jsp");
+
+        String descricao = request.getParameter("textDescricao");
+        if (descricao == null || descricao.equals("")) {
+            //response.sendRedirect();
+        } else {
+            try {
+                Empresa empresa = new Empresa(descricao);
+                EmpresaDAO.getInstance().save(empresa);
+                response.sendRedirect("Sucesso.jsp");
+            } catch (SQLException e) {
+                response.sendRedirect("Erro.jsp");
                 e.printStackTrace();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(GravarContatoAction.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
+
 }

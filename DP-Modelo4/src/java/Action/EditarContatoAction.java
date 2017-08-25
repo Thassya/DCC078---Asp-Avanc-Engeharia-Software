@@ -19,26 +19,30 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author 08240104690
+ * @author thassya
  */
-public class LerContatoAction implements Action{
+public class EditarContatoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String codigo = request.getParameter("codigo");
-        
-        if(codigo.equals("")){
-            response.sendRedirect("index.jsp");
-        }
-        else{
+         String codigo = request.getParameter("id");
+         String nome = request.getParameter("textNome");
+         String email = request.getParameter("textEmail");
+         
+         if(codigo==null || codigo.equals("")){
+              response.sendRedirect("index.jsp");
+         }
+         else{
             try{
                 int codInt = Integer.parseInt(codigo);
-                Contato c = ContatoDAO.getInstance().getContato(codInt);
+                Contato c = new Contato();
+                c.setId(codInt);
+                c.setNome(nome);
+                c.setEmail(email);
                 
-                request.setAttribute("id", c.getId());
-                request.setAttribute("nome", c.getNome());
-                request.setAttribute("email", c.getEmail());
+                ContatoDAO.getInstance().update(c);
                 
+                              
                 RequestDispatcher view = request.getRequestDispatcher("Contato/ContatoBusca.jsp");
                 view.forward(request, response);
                 

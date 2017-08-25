@@ -5,9 +5,9 @@
  */
 package Action;
 
+
 import Controller.Action;
-import Model.Contato;
-import Persistencia.ContatoDAO;
+import Persistencia.EmpresaDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,16 +16,15 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 /**
  *
- * @author 08240104690
+ * @author thassya
  */
-public class LerContatoAction implements Action{
+public class ApagarEmpresaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String codigo = request.getParameter("codigo");
+         String codigo = request.getParameter("id");
         
         if(codigo.equals("")){
             response.sendRedirect("index.jsp");
@@ -33,17 +32,15 @@ public class LerContatoAction implements Action{
         else{
             try{
                 int codInt = Integer.parseInt(codigo);
-                Contato c = ContatoDAO.getInstance().getContato(codInt);
+                EmpresaDAO.getInstance().excluir(codInt);
                 
-                request.setAttribute("id", c.getId());
-                request.setAttribute("nome", c.getNome());
-                request.setAttribute("email", c.getEmail());
+                request.setAttribute("id", codigo);
                 
-                RequestDispatcher view = request.getRequestDispatcher("Contato/ContatoBusca.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("Empresa/EmpresaExcluir.jsp");
                 view.forward(request, response);
                 
             } catch(SQLException e){
-                response.sendRedirect("Contato/ContatoErro.jsp");
+                response.sendRedirect("Erro.jsp");
                 e.printStackTrace();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(GravarContatoAction.class.getName()).log(Level.SEVERE, null, ex);

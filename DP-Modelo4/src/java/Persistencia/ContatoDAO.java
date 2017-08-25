@@ -57,7 +57,7 @@ public class ContatoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("UPDATE contatos set nome = '" + contato.getNome()
-                    + "' and email = '" + contato.getEmail() + "' WHERE id = " + contato.getId());
+                    + "', email = '" + contato.getEmail() + "' WHERE id = " + contato.getId());
         } catch (SQLException e) {
             throw e;
         } finally {

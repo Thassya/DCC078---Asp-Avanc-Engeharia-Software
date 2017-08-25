@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ContatoSucesso
-    Created on : 10/08/2017, 20:08:17
-    Author     : 07228620674
+    Document   : Excluir
+    Created on : 21/08/2017, 21:16:16
+    Author     : thassya
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Excluir Page</title>
     </head>
     <body>
-        Deu ceeeerto!!! Yayyyy!
+        <h1>O Contato de Id "${id} foi excluido com sucesso!</h1>
     </body>
 </html>

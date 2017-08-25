@@ -6,8 +6,8 @@
 package Action;
 
 import Controller.Action;
-import Model.Contato;
-import Persistencia.ContatoDAO;
+import Model.Empresa;
+import Persistencia.EmpresaDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,36 +19,38 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author 08240104690
+ * @author thassya
  */
-public class LerContatoAction implements Action{
+public class EditarEmpresaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String codigo = request.getParameter("codigo");
-        
-        if(codigo.equals("")){
-            response.sendRedirect("index.jsp");
-        }
-        else{
+         String codigo = request.getParameter("id");
+         String descricao = request.getParameter("textDescricao");
+         
+         if(codigo==null || codigo.equals("")){
+              response.sendRedirect("index.jsp");
+         }
+         else{
             try{
                 int codInt = Integer.parseInt(codigo);
-                Contato c = ContatoDAO.getInstance().getContato(codInt);
+                Empresa e = new Empresa();
+                e.setId(codInt);
+                e.setDescricao(descricao);
                 
-                request.setAttribute("id", c.getId());
-                request.setAttribute("nome", c.getNome());
-                request.setAttribute("email", c.getEmail());
+                EmpresaDAO.getInstance().update(e);
                 
-                RequestDispatcher view = request.getRequestDispatcher("Contato/ContatoBusca.jsp");
+                              
+                RequestDispatcher view = request.getRequestDispatcher("Empresa/EmpresaBusca.jsp");
                 view.forward(request, response);
                 
             } catch(SQLException e){
-                response.sendRedirect("Contato/ContatoErro.jsp");
+                response.sendRedirect("Erro.jsp");
                 e.printStackTrace();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(GravarContatoAction.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ServletException ex) {
-                Logger.getLogger(LerContatoAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LerContatoAction.class.getName()).log(Level.ALL.SEVERE, null, ex);
             }
         }
     }
