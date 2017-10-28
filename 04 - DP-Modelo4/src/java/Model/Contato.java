@@ -5,10 +5,6 @@
  */
 package Model;
 
-/**
- *
- * @author 08240104690
- */
 public class Contato {
 
     private int id;

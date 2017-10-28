@@ -14,10 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author 08240104690
- */
+
 public class ContatoDAO {
 
     private static ContatoDAO instance;

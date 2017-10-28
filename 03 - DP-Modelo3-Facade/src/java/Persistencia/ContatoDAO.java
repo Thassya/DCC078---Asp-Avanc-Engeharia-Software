@@ -10,10 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author 08240104690
- */
+
 public class ContatoDAO {
    
     private static ContatoDAO instance;

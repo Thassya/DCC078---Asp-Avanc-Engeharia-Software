@@ -5,10 +5,6 @@
  */
 package Controller;
 
-/**
- *
- * @author 08240104690
- */
 public class ActionFactory {
 
     public static Action create(String action) {

@@ -5,10 +5,7 @@
  */
 package Model;
 
-/**
- *
- * @author thassya
- */
+
 public class Empresa {
 
     private int id;

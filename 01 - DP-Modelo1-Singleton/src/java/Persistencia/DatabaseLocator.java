@@ -9,10 +9,6 @@ import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author 07228620674
- */
 public class DatabaseLocator {
     public static DatabaseLocator instance = null;
     
