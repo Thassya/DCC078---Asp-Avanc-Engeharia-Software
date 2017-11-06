@@ -14,12 +14,14 @@ public class PadrãoBridge {
         
         Jornal jornal = new Jornal(virtual);
         System.out.println(jornal.getTitulo() + " - " + jornal.imprime());
+        System.out.println();
         
         Livro livro = new Livro(impresso);
         System.out.println("Livro: " + livro.getTitulo() + " - " + livro.imprime());
         
         Revista revista = new Revista(virtual);
         System.out.println(revista.getTitulo() + " - " + revista.imprime() );
+        
     }
     
 }

@@ -11,11 +11,7 @@ public abstract class Publicacaoes {
     public Publicacaoes(IImplementor meioPublicacao){
         this.meioPublicacao = meioPublicacao;
     }
-    
-    public String obterDados(){
-        return "dados genéricos de publicações";
-    }
-    
+        
     public abstract String imprime();
     public abstract String getTitulo();
 }

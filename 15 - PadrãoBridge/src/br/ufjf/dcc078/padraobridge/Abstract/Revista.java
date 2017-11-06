@@ -2,10 +2,6 @@ package br.ufjf.dcc078.padraobridge.Abstract;
 
 import br.ufjf.dcc078.padraobridge.Implementor.IImplementor;
 
-/**
- *
- * @author thassya
- */
 public class Revista extends Publicacaoes {
 
     public Revista(IImplementor resources) {
@@ -20,5 +16,9 @@ public class Revista extends Publicacaoes {
     @Override
     public String getTitulo() {
         return "Veja";
+    }
+    
+    public String getEditora(){
+        return "Abril";
     }
 }

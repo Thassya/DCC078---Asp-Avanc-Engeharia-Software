@@ -11,4 +11,8 @@ public class Impresso implements IImplementor {
        return "Entregue por meio impresso";
     }
 
+    @Override
+    public String tipo(){
+        return "Papel comum";
+    }
 }

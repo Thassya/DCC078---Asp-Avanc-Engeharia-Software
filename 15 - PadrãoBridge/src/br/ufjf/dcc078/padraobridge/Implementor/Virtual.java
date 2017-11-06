@@ -14,5 +14,10 @@ public class Virtual implements IImplementor {
     public String entrega() {
         return "Entregue por meio digital";
     }
+    
+    @Override
+    public String tipo(){
+        return "PDF";
+    }
 
 }
